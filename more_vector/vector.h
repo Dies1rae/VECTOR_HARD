@@ -11,7 +11,7 @@ public:
     RawMemory() = default;
     RawMemory(const RawMemory&) = delete;
 
-    explicit RawMemory(size_t capacity): buffer_(Allocate(capacity)), capacity_(capacity) {}
+    explicit RawMemory(size_t capacity) : buffer_(Allocate(capacity)), capacity_(capacity) {}
     RawMemory(RawMemory&& other) noexcept {
         this->Allocate(other.capacity_);
         std::swap(this->capacity_, other.capacity_);
@@ -88,11 +88,11 @@ public:
 
     Vector() = default;
 
-    explicit Vector(size_t size): data_(size), size_(size) {
+    explicit Vector(size_t size) : data_(size), size_(size) {
         std::uninitialized_value_construct_n(this->data_.GetAddress(), this->size_);
     }
 
-    Vector(const Vector& other): data_(other.size_), size_(other.size_) {
+    Vector(const Vector& other) : data_(other.size_), size_(other.size_) {
         if constexpr (std::is_nothrow_move_constructible_v<T> || !std::is_copy_constructible_v<T>) {
             std::uninitialized_move_n(other.data_.GetAddress(), this->size_, this->data_.GetAddress());
         } else {

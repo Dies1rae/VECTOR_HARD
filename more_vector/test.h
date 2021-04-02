@@ -34,7 +34,7 @@ namespace {
             ++num_default_constructed;
         }
 
-        explicit Obj(int id): id(id) {
+        explicit Obj(int id) : id(id) {
             ++num_constructed_with_id;
         }
 
@@ -42,7 +42,7 @@ namespace {
             ++num_constructed_with_id_and_name;
         }
 
-        Obj(const Obj& other): id(other.id) {
+        Obj(const Obj& other) : id(other.id) {
             if (other.throw_on_copy) {
                 throw std::runtime_error("Oops");
             }
@@ -581,11 +581,11 @@ struct C {
 void Dump() {
     using namespace std;
     cerr << "Def ctors: "sv << C::def_ctor              
-        << ", Copy ctors: "sv << C::copy_ctor          
-        << ", Move ctors: "sv << C::move_ctor          
-        << ", Copy assignments: "sv << C::copy_assign  
-        << ", Move assignments: "sv << C::move_assign  
-        << ", Dtors: "sv << C::dtor << endl;
+         << ", Copy ctors: "sv << C::copy_ctor          
+         << ", Move ctors: "sv << C::move_ctor          
+         << ", Copy assignments: "sv << C::copy_assign  
+         << ", Move assignments: "sv << C::move_assign  
+         << ", Dtors: "sv << C::dtor << endl;
 }
 
 void Benchmark() {
